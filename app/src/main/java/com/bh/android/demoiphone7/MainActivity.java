@@ -41,16 +41,21 @@ public class MainActivity extends Activity {
                 }
 
             } else {
-                // Ready to play sound
-                if (mMediaPlayer != null) {
-                    mMediaPlayer.stop();
-                }
+                stopPlayingSound();
             }
         }
 
         @Override
         public void onAccuracyChanged(Sensor sensor, int accuracy) {
 
+        }
+    }
+
+    private void stopPlayingSound() {
+        // Ready to play sound
+        if (mMediaPlayer != null) {
+            mMediaPlayer.stop();
+            mMediaPlayer = null;
         }
     }
 
@@ -94,10 +99,7 @@ public class MainActivity extends Activity {
         mSensorManager.unregisterListener(mMySensorEventListener);
         mMySensorEventListener = null;
 
-        // Try to stop playing sound
-        if (mMediaPlayer != null & mMediaPlayer.isPlaying()) {
-            mMediaPlayer.stop();
-        }
+        stopPlayingSound();
     }
 
     @Override
